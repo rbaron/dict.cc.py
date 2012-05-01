@@ -18,7 +18,6 @@ class Dict:
 		req = urllib2.Request("http://www.dict.cc/?s="+word, None, {'User-agent': 'Mozilla/5.0'})
 		f = urllib2.urlopen(req)
 		self.Response = f.read()
-		#print self.Response
 	
 	# Find 'var c1Arr' and 'var c2Arr' 
 	def parseResponse(self):
@@ -59,8 +58,6 @@ class Dict:
 
 			# Is it more than MAX_RESULTS?
 			minWords = minWords if minWords <= MAX_RESULTS else MAX_RESULTS
-
-			print minWords
 
 			# Find biggest word in first col
 			length = 0
