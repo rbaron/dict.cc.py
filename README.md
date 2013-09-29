@@ -10,19 +10,25 @@ Usage
 
 
 > $ python dict.cc.py en sv beer
+
 > dict.cc.py:
-> 
+
 > EN to SV: beer 
-> 
+
 > öl.....................beer
+
 > ölglas.................beer glass
+
 > veteöl.................wheat beer
 
 Or add it to your path:
 
 > $ chmod +x dict.cc.py
+
 > $ sudo cp dict.cc.py /usr/bin/
+
 > $ dict.cc.py human body
+
 > (Same results as above)
 
 License
