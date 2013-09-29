@@ -10,20 +10,35 @@ MAX_RESULTS = 20
 
 class Dict:
 	def __init__(self):
-		self.Eng = []
-		self.De = []
+
+		self.inputLanguage = "de"
+		self.outputLanguage = "en"
+
+		self.input = []
+		self.output = []
+
+
+	def setInputLanguage(self, lang):
+		self.inputLanguage = lang
+
+	def setOutputLanguage(self, lang):
+		self.outputLanguage = lang
 
 	def getResponse(self, word):
 		# Trick to avoid dict.cc from denying the request: change User-agent to firefox's
-		req = urllib2.Request("http://www.dict.cc/?s="+word, None, {'User-agent': 'Mozilla/5.0'})
+
+		lang = self.inputLanguage + self.outputLanguage
+
+		req = urllib2.Request("http://"+lang+".dict.cc/?s="+word, None, {'User-agent': 'Mozilla/5.0'})
 		f = urllib2.urlopen(req)
 		self.Response = f.read()
+
 	
 	# Find 'var c1Arr' and 'var c2Arr' 
 	def parseResponse(self):
 		
-		self.engWords = []
-		self.deWords = []
+		self.inputWords = []
+		self.outputWords = []
 
 		engLine = deLine = ""
 
@@ -45,52 +60,55 @@ class Dict:
 			pattern = "\"[^,]+\""
 
 			# Return list of matching strings
-			self.engWords = re.findall(pattern, engLine)
-			self.deWords = re.findall(pattern, deLine)
+			self.inputWords = re.findall(pattern, engLine)
+			self.outputWords = re.findall(pattern, deLine)
 
 	def printResults(self):
-		if not self.engWords or not self.deWords:
+		if not self.inputWords or not self.outputWords:
 			print "No results."
 
 		else:
 			# Get minumum number of both eng and de
-			minWords = len(self.engWords) if len(self.engWords) <= len(self.deWords) else len(self.deWords)
+			minWords = len(self.inputWords) if len(self.inputWords) <= len(self.outputWords) else len(self.outputWords)
 
 			# Is it more than MAX_RESULTS?
 			minWords = minWords if minWords <= MAX_RESULTS else MAX_RESULTS
 
 			# Find biggest word in first col
 			length = 0
-			for w in self.engWords[:minWords]:
+			for w in self.inputWords[:minWords]:
 				length = length if length > len(w) else len(w)
 
-			
-			# Nice output
-			print "English" + " "*(length - len("English") + 15) + "Deutsch"
-			print "=======" + " "*(length - len("English") + 15) + "=======\n"
 			for i in range(0,minWords):
-				if self.engWords[i] == "\"\"": continue
-				print self.engWords[i].strip("\"") + "."*(length - len(self.engWords[i].strip("\"")) + 15) + self.deWords[i].strip("\"")
+				if self.inputWords[i] == "\"\"": continue
+				#print self.inputWords[i].strip("\"") + "," + self.outputWords[i].strip("\"")
+				print self.inputWords[i].strip("\"") + "."*(length - len(self.inputWords[i].strip("\"")) + 15) + self.outputWords[i].strip("\"")
 
 
 if __name__ == "__main__":
 
 	print "dict.cc.py:\n"
 
-	if len(sys.argv) < 2:
-		print "USAGE:\n$ dict.cc.py \"word\" (without the \"s)"
+	if len(sys.argv) < 4:
+		print "USAGE:\n$ dict.cc.py \"input language (e.g. DE for German)\" \"output language e.g. EN for English)\" \"word\" (without the \"s)"
 	else:
 		# Concat all arguments into one word (urlencoded space)
 		expression = ""
-		for index in range(1, len(sys.argv)):
+
+		inputFromSysArgv = sys.argv[1].upper()
+		outputFromSysArgv = sys.argv[2].upper()
+
+		for index in range(3, len(sys.argv)):
 			expression += sys.argv[index] + " "
 
-		print "Interpreted input: " + expression + "\n"
+		print inputFromSysArgv + " to " + outputFromSysArgv + ": " + expression + "\n"
 		
 		# Urlencode input
 		expression = urllib.quote(expression)
 
 		myDict = Dict()
+		myDict.setInputLanguage( inputFromSysArgv )
+		myDict.setOutputLanguage( outputFromSysArgv )
 		myDict.getResponse(expression)
 		myDict.parseResponse()
 		myDict.printResults()
