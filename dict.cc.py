@@ -29,14 +29,16 @@ class Dict:
 
 		lang = self.inputLanguage + self.outputLanguage
 
-		req = urllib2.Request("http://"+lang+".dict.cc/?s="+word, None, {'User-agent': 'Mozilla/5.0'})
+		req = urllib2.Request("http://"+lang+".dict.cc/?s="+word, None,
+                    {'User-agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:30.0) Gecko/20100101 Firefox/30.0'}
+                )
 		f = urllib2.urlopen(req)
 		self.Response = f.read()
 
-	
-	# Find 'var c1Arr' and 'var c2Arr' 
+
+	# Find 'var c1Arr' and 'var c2Arr'
 	def parseResponse(self):
-		
+
 		self.inputWords = []
 		self.outputWords = []
 
@@ -102,7 +104,7 @@ if __name__ == "__main__":
 			expression += sys.argv[index] + " "
 
 		print inputFromSysArgv + " to " + outputFromSysArgv + ": " + expression + "\n"
-		
+
 		# Urlencode input
 		expression = urllib.quote(expression)
 
