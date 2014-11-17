@@ -1,35 +1,36 @@
 dict.cc.py
 =========
 
-Unofficial command line client for dict.cc. 
+![dict.cc.py usage](http://i.imgur.com/83XCU53.gif)
 
-It supports all languages dict.cc uses, use the dict.cc language tokens (e.g. EN for English, DE for German, FR for French or SV for Swedish).
+Simple unofficial command line interface for ![dict.cc](http://dict.cc). It supports translations between the most common languages available on the website.
+
+Installation
+------------
+
+dict.cc.py is available at pypi. All you have to do to install it is:
+
+```bash
+pip install dict.cc.py
+```
 
 Usage
 -----
 
+Simple type:
 
-> $ python dict.cc.py en sv beer
+```bash
+$ dict.cc.py en sv beer
+Showing 3 of 3 result(s)
 
-> dict.cc.py:
+  English                                                     Swedish
+  =======                                                     =======
+  beer........................................................öl
+  beer glass..................................................ölglas
+  wheat beer..................................................veteöl
+```
 
-> EN to SV: beer 
-
-> öl.....................beer
-
-> ölglas.................beer glass
-
-> veteöl.................wheat beer
-
-Or add it to your path:
-
-> $ chmod +x dict.cc.py
-
-> $ sudo cp dict.cc.py /usr/bin/
-
-> $ dict.cc.py human body
-
-> (Same results as above)
+Available languages include: `en`, `de`, `sv`, `pt`, `it`, `fr`, `ro`.
 
 License
 -------
