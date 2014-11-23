@@ -17,7 +17,7 @@ pip install dict.cc.py
 Usage
 -----
 
-Simple type:
+It's super easy! Here's a quick example of using it to translate the word `beer` between english (`en`) and swedish (`sv`):
 
 ```bash
 $ dict.cc.py en sv beer
