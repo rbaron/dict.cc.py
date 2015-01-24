@@ -2,7 +2,11 @@
 import urllib2
 import re
 
-from bs4 import BeautifulSoup
+try:
+    from bs4 import BeautifulSoup
+except ImportError:
+    from BeautifulSoup import BeautifulSoup
+    BeautifulSoup.find_all = BeautifulSoup.findAll
 
 AVAILABLE_LANGUAGES = {
     "en": "english",
@@ -14,6 +18,7 @@ AVAILABLE_LANGUAGES = {
     "ro": "romanian",
     "it": "italian",
     "pt": "portuguese",
+    "ru": "russian"
 }
 
 
