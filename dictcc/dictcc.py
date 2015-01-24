@@ -14,6 +14,7 @@ AVAILABLE_LANGUAGES = {
     "ro": "romanian",
     "it": "italian",
     "pt": "portuguese",
+    "ru": "russian"
 }
 
 
