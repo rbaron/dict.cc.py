@@ -17,7 +17,8 @@ def parse_args():
         choices=AVAILABLE_LANGUAGES.keys())
     parser.add_argument("output_language", type=str, help="Output language",
         choices=AVAILABLE_LANGUAGES.keys())
-    parser.add_argument("word", type=str, help="Word to translate")
+    parser.add_argument("word", type=str, help="""Word to translate (use
+                        quotation marks for phrases like \"free beer\").""")
     parser.add_argument("--max-results", type=int, default=10)
     args = parser.parse_args()
 

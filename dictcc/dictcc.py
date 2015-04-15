@@ -51,9 +51,10 @@ class Dict(object):
     @classmethod
     def _get_response(cls, word, from_language, to_language):
         subdomain = from_language.lower()+to_language.lower()
+        formatted_word = word.replace(" ", "+")
 
         req = urllib2.Request(
-            "http://"+subdomain+".dict.cc/?s="+word,
+            "http://"+subdomain+".dict.cc/?s="+formatted_word,
             None,
             {'User-agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:30.0) Gecko/20100101 Firefox/30.0'}
         )
