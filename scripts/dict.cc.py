@@ -29,20 +29,20 @@ def parse_args():
 
 
 def print_header(from_lang, to_lang):
-    print "{}{}{}\n{}{}{}".format(
+    print(u"{}{}{}\n{}{}{}".format(
         from_lang,
-        " "*(LINE_LENGTH-len(from_lang.decode("utf-8"))),
+        " "*(LINE_LENGTH-len(from_lang)),
         to_lang,
-        "="*len(from_lang.decode("utf-8")),
-        " "*(LINE_LENGTH-len(from_lang.decode("utf-8"))),
-        "="*len(to_lang.decode("utf-8")),
-    )
+        "="*len(from_lang),
+        " "*(LINE_LENGTH-len(from_lang)),
+        "="*len(to_lang),
+    ))
 
 
 def print_translation(input_word, output_word):
-    print "{}{}{}".format(input_word,
-                          "."*(LINE_LENGTH-len(input_word.decode("utf-8"))),
-                          output_word)
+    print(u"{}{}{}".format(input_word,
+                          "."*(LINE_LENGTH-len(input_word)),
+                          output_word))
 
 
 
@@ -54,12 +54,12 @@ def run():
                             args.output_language)
 
     if not result.n_results:
-        print "No results found for {} ({} <-> {}).".format(
-            args.word, args.input_language, args.output_language)
+        print("No results found for {} ({} <-> {}).".format(
+            args.word, args.input_language, args.output_language))
         return
     else:
-        print "Showing {} of {} result(s)\n".format(
-            min(args.max_results, result.n_results), result.n_results)
+        print("Showing {} of {} result(s)\n".format(
+            min(args.max_results, result.n_results), result.n_results))
 
     print_header(result.from_lang, result.to_lang)
 

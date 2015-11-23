@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
-import urllib2
+
+try:
+    # python2
+    import urllib2
+except ImportError:
+    # python3
+    import urllib.request as urllib2
+
 import re
 
 try:
@@ -32,8 +39,12 @@ class Result(object):
     def __init__(self, from_lang=None, to_lang=None, translation_tuples=None):
         self.from_lang = from_lang
         self.to_lang = to_lang
-        self.translation_tuples = translation_tuples or []
-        self.n_results = len(self.translation_tuples)
+        self.translation_tuples = list(translation_tuples) \
+                                  if translation_tuples else []
+
+    @property
+    def n_results(self):
+        return len(self.translation_tuples)
 
 
 class Dict(object):
@@ -59,7 +70,8 @@ class Dict(object):
             {'User-agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:30.0) Gecko/20100101 Firefox/30.0'}
         )
 
-        return urllib2.urlopen(req).read()
+        res = urllib2.urlopen(req).read()
+        return res.decode("utf-8")
 
     # Quick and dirty: find javascript arrays for input/output words on response body
     @classmethod
@@ -82,7 +94,7 @@ class Dict(object):
         if not any([in_list, out_list]):
             return Result()
 
-        soup = BeautifulSoup(response_body)
+        soup = BeautifulSoup(response_body, "html.parser")
 
         # HTML parsing madness. Don't even bother.
         def extract_lang(html_b_selector):
@@ -115,7 +127,7 @@ class Dict(object):
                       else Result(
                           from_lang=result.to_lang,
                           to_lang=result.from_lang,
-                          translation_tuples=zip(to_words, from_words)
+                          translation_tuples=zip(to_words, from_words),
                       )
 
 

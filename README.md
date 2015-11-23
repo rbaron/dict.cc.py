@@ -8,7 +8,7 @@ Simple unofficial command line interface for ![dict.cc](http://dict.cc) written 
 Installation
 ------------
 
-dict.cc.py is available at pypi. All you have to do to install it is:
+dict.cc.py works with python2 and python3 and is available at pypi. All you have to do to install it is:
 
 ```bash
 pip install dict.cc.py
