@@ -42,7 +42,7 @@ def print_header(from_lang, to_lang):
 def print_translation(input_word, output_word):
     print(u"{}{}{}".format(input_word,
                           "."*(LINE_LENGTH-len(input_word)),
-                          output_word))
+                          output_word).encode('utf-8'))
 
 
 
