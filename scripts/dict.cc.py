@@ -9,6 +9,12 @@ from dictcc import Dict, AVAILABLE_LANGUAGES
 LINE_LENGTH = 60
 
 
+def ensure_unicode(string):
+    if hasattr(string, "decode"):
+        return string.decode("utf-8")
+    return string
+
+
 def parse_args():
     parser = argparse.ArgumentParser(description="Unoficial CLI for dict.cc. "\
         "It supports translations between the following languages: {}".format(
@@ -17,8 +23,10 @@ def parse_args():
         choices=AVAILABLE_LANGUAGES.keys())
     parser.add_argument("output_language", type=str, help="Output language",
         choices=AVAILABLE_LANGUAGES.keys())
-    parser.add_argument("word", type=str, help="""Word to translate (use
-                        quotation marks for phrases like \"free beer\").""")
+    parser.add_argument("word",
+                         type=ensure_unicode,
+                         help=("Word to translate (use quotation marks for "
+                               "phrases like \"free beer\")."))
     parser.add_argument("--max-results", type=int, default=10)
     args = parser.parse_args()
 
@@ -42,7 +50,7 @@ def print_header(from_lang, to_lang):
 def print_translation(input_word, output_word):
     print(u"{}{}{}".format(input_word,
                           "."*(LINE_LENGTH-len(input_word)),
-                          output_word).encode('utf-8'))
+                          output_word))
 
 
 
