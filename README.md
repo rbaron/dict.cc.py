@@ -1,9 +1,9 @@
 dict.cc.py
 =========
 
-![dict.cc.py usage](http://i.imgur.com/83XCU53.gif)
+![dict.cc.py usage](https://i.imgur.com/83XCU53.gif)
 
-Simple unofficial command line interface for ![dict.cc](http://dict.cc) written in Python 2. It supports translations between the most common languages available on the website.
+Simple unofficial command line interface for ![dict.cc](https://www.dict.cc) written in Python 2. It supports translations between the most common languages available on the website.
 
 Installation
 ------------
