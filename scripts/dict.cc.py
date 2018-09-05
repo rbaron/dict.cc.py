@@ -48,8 +48,9 @@ def print_header(from_lang, to_lang):
 
 
 def print_translation(input_word, output_word):
-    print(u"{}{}{}".format(input_word,
-                          "."*(LINE_LENGTH-len(input_word)),
+    # Two points less for the spaces, so tables don't break
+    print(u"{} {} {}".format(input_word,
+                          "."*(LINE_LENGTH-len(input_word)-2),
                           output_word))
 
 
