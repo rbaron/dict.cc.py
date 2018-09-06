@@ -65,7 +65,7 @@ class Dict(object):
     def _get_response(cls, word, from_language, to_language):
         subdomain = from_language.lower()+to_language.lower()
 
-        url = "http://"+subdomain+".dict.cc/?s=" + quote_plus(word.encode("utf-8"))
+        url = "https://"+subdomain+".dict.cc/?s=" + quote_plus(word.encode("utf-8"))
 
         req = urllib2.Request(
             url,
