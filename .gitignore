@@ -2,3 +2,5 @@
 *.pyc
 dict.cc.py.egg-info/
 dist/
+
+venv/

@@ -101,9 +101,7 @@ class Dict(object):
 
         # HTML parsing madness. Don't even bother.
         def extract_lang(html_b_selector):
-            return re.sub("<[^>]*>| ", "", str(html_b_selector.contents[0])) \
-                   if not html_b_selector.a \
-                   else str(html_b_selector.a.contents[0])
+            return re.search("([A-Z][a-z]+)", str(html_b_selector)).group()
 
         left_b_selector = soup.find_all("td", width="307")[0].b
         right_b_selector = soup.find_all("td", width="306")[0].b
