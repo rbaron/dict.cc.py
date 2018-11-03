@@ -81,6 +81,21 @@ class Dict(object):
     def _parse_response(cls, response_body):
         soup = BeautifulSoup(response_body, "html.parser")
 
+        suggestions = [tds.find_all("a") for tds in soup.find_all("td", class_="td3nl")]
+        if len(suggestions) == 2:
+            languages = [lang.string for lang in soup.find_all("td", class_="td2")][:2]
+            if len(languages) != 2:
+                raise Exception("dict.cc results page layout change, please raise an issue.")
+
+            return Result(
+                from_lang=languages[0],
+                to_lang=languages[1],
+                translation_tuples=zip(
+                    [e.string for e in suggestions[0]],
+                    [e.string for e in suggestions[1]]
+                ),
+            )
+
         translations = [tds.find_all("a") for tds in soup.find_all("td", class_="td7nl", attrs={'dir': "ltr"})]
         if len(translations) >= 2:
             languages = [next(lang.strings) for lang in soup.find_all("td", class_="td2", attrs={'dir': "ltr"})]
