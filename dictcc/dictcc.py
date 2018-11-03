@@ -79,41 +79,39 @@ class Dict(object):
     # Quick and dirty: find javascript arrays for input/output words on response body
     @classmethod
     def _parse_response(cls, response_body):
-
-        in_list = []
-        out_list = []
-
-        def sanitize(word):
-            return re.sub("[\\\\\"]", "", word)
-
-        javascript_list_pattern = "\"[^,]+\""
-
-        for line in response_body.split("\n"):
-            if "var c1Arr" in line:
-                in_list = map(sanitize, re.findall(javascript_list_pattern, line))
-            elif "var c2Arr" in line:
-                out_list = map(sanitize, re.findall(javascript_list_pattern, line))
-
-        if not any([in_list, out_list]):
-            return Result()
-
         soup = BeautifulSoup(response_body, "html.parser")
 
-        # HTML parsing madness. Don't even bother.
-        def extract_lang(html_b_selector):
-            return re.search("([A-Z][a-z]+)", str(html_b_selector)).group()
+        suggestions = [tds.find_all("a") for tds in soup.find_all("td", class_="td3nl")]
+        if len(suggestions) == 2:
+            languages = [lang.string for lang in soup.find_all("td", class_="td2")][:2]
+            if len(languages) != 2:
+                raise Exception("dict.cc results page layout change, please raise an issue.")
 
-        left_b_selector = soup.find_all("td", width="307")[0].b
-        right_b_selector = soup.find_all("td", width="306")[0].b
-        [left_lang, right_lang] = map(extract_lang, [left_b_selector, right_b_selector])
+            return Result(
+                from_lang=languages[0],
+                to_lang=languages[1],
+                translation_tuples=zip(
+                    [e.string for e in suggestions[0]],
+                    [e.string for e in suggestions[1]]
+                ),
+            )
 
-        # Okay, you can start bothering again.
+        translations = [tds.find_all("a") for tds in soup.find_all("td", class_="td7nl", attrs={'dir': "ltr"})]
+        if len(translations) >= 2:
+            languages = [next(lang.strings) for lang in soup.find_all("td", class_="td2", attrs={'dir': "ltr"})]
+            if len(languages) != 2:
+                raise Exception("dict.cc results page layout change, please raise an issue.")
 
-        return Result(
-            from_lang=left_lang,
-            to_lang=right_lang,
-            translation_tuples=zip(in_list, out_list),
-        )
+            return Result(
+                from_lang=languages[0],
+                to_lang=languages[1],
+                translation_tuples=zip(
+                    [" ".join(map(lambda e: " ".join(e.strings), r)) for r in translations[0:-1:2]],
+                    [" ".join(map(lambda e: e.string, r)) for r in translations[1:-1:2]]
+                ),
+            )
+
+        return Result()
 
     # Heuristic: left column is the one with more occurrences of the to-be-translated word
     @classmethod
