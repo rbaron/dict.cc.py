@@ -107,7 +107,7 @@ class Dict(object):
                 to_lang=languages[1],
                 translation_tuples=zip(
                     [" ".join(map(lambda e: " ".join(e.strings), r)) for r in translations[0:-1:2]],
-                    [" ".join(map(lambda e: e.string, r)) for r in translations[1:-1:2]]
+                    [" ".join(map(lambda e: e.string if e.string else "".join(e.strings), r)) for r in translations[1:-1:2]]
                 ),
             )
 
