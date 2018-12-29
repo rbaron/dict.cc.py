@@ -51,7 +51,7 @@ Showing 10 of 50 result(s)
   beer........................................................Gerstensaft
 ```
 
-Available languages include: `en`, `de`, `sv`, `pt`, `it`, `fr`, `ro`.
+Available languages include: `en`, `de`, `sv`, `pt`, `it`, `fr`, `ro`, `nl`.
 
 License
 -------
