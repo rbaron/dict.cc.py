@@ -23,6 +23,7 @@ AVAILABLE_LANGUAGES = {
     "fr": "french",
     "sv": "swedish",
     "es": "spanish",
+    "nl": "dutch",
     "bg": "bulgarian",
     "ro": "romanian",
     "it": "italian",
