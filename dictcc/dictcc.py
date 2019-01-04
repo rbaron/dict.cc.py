@@ -1,15 +1,6 @@
 # -*- coding: utf-8 -*-
 
-try:
-    # python2
-    import urllib2
-    from urllib import quote_plus
-except ImportError:
-    # python3
-    import urllib.request as urllib2
-    from urllib.parse import quote_plus
-
-import re
+import requests
 
 try:
     from bs4 import BeautifulSoup
@@ -64,18 +55,12 @@ class Dict(object):
 
     @classmethod
     def _get_response(cls, word, from_language, to_language):
-        subdomain = from_language.lower()+to_language.lower()
-
-        url = "https://"+subdomain+".dict.cc/?s=" + quote_plus(word.encode("utf-8"))
-
-        req = urllib2.Request(
-            url,
-            None,
-            {'User-agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:30.0) Gecko/20100101 Firefox/30.0'}
+        res = requests.get(
+            url="https://" + from_language.lower() + to_language.lower() + ".dict.cc",
+            params={"s": word.encode("utf-8")},
+            headers={'User-agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:30.0) Gecko/20100101 Firefox/30.0'}
         )
-
-        res = urllib2.urlopen(req).read()
-        return res.decode("utf-8")
+        return res.content.decode("utf-8")
 
     # Quick and dirty: find javascript arrays for input/output words on response body
     @classmethod

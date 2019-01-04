@@ -5,7 +5,7 @@ setup(
       description="Unofficial dict.cc command line interface",
       version="2.0.1",
       url="https://github.com/rbaron/dict.cc.py",
-      install_requires=["beautifulsoup4"],
+      install_requires=["beautifulsoup4","requests"],
       packages=find_packages(),
       scripts=["scripts/dict.cc.py"]
      )
