@@ -3,12 +3,12 @@ dict.cc.py
 
 ![dict.cc.py usage](https://i.imgur.com/83XCU53.gif)
 
-Simple unofficial command line interface for ![dict.cc](https://www.dict.cc) written in Python 2. It supports translations between the most common languages available on the website.
+Simple unofficial command line interface for ![dict.cc](https://www.dict.cc) written in Python. It supports translations between the most common languages available on the website.
 
 Installation
 ------------
 
-dict.cc.py works with python2 and python3 and is available at pypi. All you have to do to install it is:
+dict.cc.py works with Python 2 and Python 3 and is available on PyPi. All you have to do to install it is:
 
 ```bash
 pip install dict.cc.py
@@ -21,34 +21,34 @@ It's super easy! Here's a quick example of using it to translate the word `beer`
 
 ```bash
 $ dict.cc.py en sv beer
-Showing 3 of 3 result(s)
+Showing 2 of 2 result(s)
 
-  English                                                     Swedish
-  =======                                                     =======
-  beer........................................................öl
-  beer glass..................................................ölglas
-  wheat beer..................................................veteöl
+English                                                     Swedish
+========                                                    =======
+beer ...................................................... öl
+beer glass ................................................ ölglas
 ```
 
 You can also search for phrases by using quotation marks:
 
 ```bash
-$ dict.cc.py en sv "free beer"
-Showing 10 of 50 result(s)
+% dict.cc.py en de body
+Showing 10 of 49 result(s)
 
-  English                                                     German
-  =======                                                     =======
-  free beer...................................................Freibier
-  alcohol-free beer...........................................alkoholfreies Bier
-  free as in beer.............................................frei wie in Freibier
-  Beer-Lambert law............................................Lambert-Beer-Gesetz
-  free agent..................................................Free Agent
-  lead-free labels............................................Bleifrei-Aufkleber
-  Free Birds..................................................Free Birds – Esst uns an einem anderen Tag
-  beer........................................................Bier
-  beer........................................................Gerstenkaltschale
-  beer........................................................Gerstenlimonade
-  beer........................................................Gerstensaft
+Englisch                                                    Deutsch
+=========                                                   =======
+body ...................................................... Körper-
+a'body [Scot.] [allbody] .................................. jedermann
+body [also wine] .......................................... Körper [auch bei Wein]
+body ...................................................... Leib
+body [dead body ] ......................................... Leiche
+body ...................................................... Karosserie
+body [trunk] .............................................. Rumpf
+body [main part] .......................................... Hauptteil
+body ...................................................... Gehäuse
+body ...................................................... Körperschaft
+body [society, organisation for sth.] ..................... Gesellschaft [Organisation]
+
 ```
 
 Available languages include: `en`, `de`, `sv`, `pt`, `it`, `fr`, `ro`, `nl`.
