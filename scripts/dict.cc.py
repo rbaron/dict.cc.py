@@ -27,7 +27,8 @@ def parse_args():
                          type=ensure_unicode,
                          help=("Word to translate (use quotation marks for "
                                "phrases like \"free beer\")."))
-    parser.add_argument("--max-results", type=int, default=10)
+    parser.add_argument("--max-results", "-n", type=int, default=10,
+                        help="Number of results to display. -1 for no limit.")
     args = parser.parse_args()
 
     if args.input_language == args.output_language:
