@@ -82,7 +82,7 @@ class Dict(object):
                 ),
             )
 
-        translations = [tds.find_all("a") for tds in soup.find_all("td", class_="td7nl", attrs={'dir': "ltr"})]
+        translations = [tds.find_all(["a", "var"]) for tds in soup.find_all("td", class_="td7nl", attrs={'dir': "ltr"})]
         if len(translations) >= 2:
             languages = [next(lang.strings) for lang in soup.find_all("td", class_="td2", attrs={'dir': "ltr"})]
             if len(languages) != 2:
