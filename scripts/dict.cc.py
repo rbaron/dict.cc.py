@@ -85,9 +85,9 @@ def print_translation(input_word, output_word, do_color, search_phrase):
             # 1.Remove non alphabet characters from search_phrase
             # 2.Split on spaces.
             # 3.Match words in search_phrase as whole words only, ignore case
-            # NB. if the word is within brackets colorization will be inacurate
+            # NB. if the word is within brackets colorization will be inaccurate
             for wrd in re.sub('[^\w] ', '', search_phrase).split(" "):
-                string = re.sub(r"\b({})\b".format(re.escape(wrd)),
+                string = re.sub(r"\b(" + re.escape(wrd) + r")\b",
                             clr.Fore.GREEN + r"\1" + clr.Fore.RESET,
                             string,
                             flags=re.IGNORECASE)
