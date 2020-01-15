@@ -53,6 +53,17 @@ body [society, organisation for sth.] ..................... Gesellschaft [Organi
 
 Available languages include: `en`, `de`, `sv`, `pt`, `it`, `fr`, `ro`, `nl`.
 
+Usage as Code
+------------
+
+```
+>>> from dictcc import Dict
+>>> translator = Dict()
+>>> result = translator.translate("hello", from_language="en", to_language="de")
+>>> result.translation_tuples[:2]
+[('Hello !', 'Hallo!'), ('Hello !', 'Servus! [bayer.] [österr.]')]
+```
+
 License
 -------
 
