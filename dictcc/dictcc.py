@@ -108,11 +108,15 @@ class Dict(object):
 
         [from_words, to_words] = zip(*result.translation_tuples)
 
-        return result if from_words.count(word) >= to_words.count(word) \
+        occurences = {"from_lang": 0, "to_lang": 0}
+        for [from_word, to_word] in result.translation_tuples:
+            occurences["from_lang"] = occurences["from_lang"] + 1 if from_word.lower().count(word.lower()) else occurences["from_lang"]
+            occurences["to_lang"] = occurences["to_lang"] + 1 if to_word.lower().count(word.lower()) else occurences["to_lang"]
+
+        return result if occurences["from_lang"] >= occurences["to_lang"] \
                       else Result(
                           from_lang=result.to_lang,
                           to_lang=result.from_lang,
                           translation_tuples=zip(to_words, from_words),
                       )
-
 
