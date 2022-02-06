@@ -51,7 +51,7 @@ body [society, organisation for sth.] ..................... Gesellschaft [Organi
 
 ```
 
-Available languages include: `en`, `de`, `sv`, `pt`, `it`, `fr`, `ro`, `nl`.
+Available languages include: `en`, `de`, `sv`, `pt`, `it`, `fr`, `ro`, `nl`, `no`.
 
 Usage as Code
 ------------

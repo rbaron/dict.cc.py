@@ -13,6 +13,7 @@ AVAILABLE_LANGUAGES = {
     "de": "german",
     "fr": "french",
     "sv": "swedish",
+    "no": "norwegian (bokmål)",
     "es": "spanish",
     "nl": "dutch",
     "bg": "bulgarian",
